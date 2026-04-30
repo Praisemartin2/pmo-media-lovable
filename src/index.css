@@ -1,0 +1,52 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html { scroll-behavior: smooth; }
+  body {
+    @apply bg-bone-200 text-ink-900 font-sans antialiased;
+    font-size: 16px;
+    line-height: 1.55;
+    overflow-x: hidden;
+  }
+  p { text-wrap: pretty; }
+  *:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px theme('colors.bone.200'), 0 0 0 4px theme('colors.forest.600');
+  }
+}
+
+@layer components {
+  .container-x {
+    @apply max-w-[1200px] mx-auto px-8 md:px-5;
+  }
+  .caps {
+    @apply font-mono text-[11px] font-medium uppercase tracking-caps;
+  }
+  .btn {
+    @apply inline-flex items-center justify-center gap-2.5
+           font-sans font-semibold text-[15px] tracking-[0.005em]
+           px-[26px] py-3.5 rounded
+           border border-transparent cursor-pointer whitespace-nowrap
+           transition-[background,color,transform] duration-150 ease-out-expo;
+  }
+  .btn-primary {
+    @apply bg-forest-600 text-white border-forest-600 hover:bg-forest-500 hover:border-forest-500;
+  }
+  .btn-secondary {
+    @apply bg-transparent text-ink-900 border-ink-900 hover:bg-ink-900 hover:text-bone-100;
+  }
+  .btn-light {
+    @apply bg-bone-100 text-ink-900 border-bone-100 hover:bg-white hover:border-white;
+  }
+  .btn-outline-light {
+    @apply bg-transparent text-white border-white/45 hover:bg-white/10 hover:border-white;
+  }
+  .btn-sm {
+    @apply px-[18px] py-2.5 text-[13px];
+  }
+  .btn:disabled {
+    @apply opacity-50 cursor-not-allowed;
+  }
+}
