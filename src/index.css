@@ -1,52 +1,73 @@
+/* Webfonts are linked from index.html (preconnect + stylesheet) so the request starts before this bundle loads. */
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* ============================================================
+   PMO Media — design system
+   Black ground · ice-white type · one crimson accent per frame
+   All colors are HSL and surfaced as Tailwind tokens.
+   ============================================================ */
 @layer base {
-  html { scroll-behavior: smooth; }
-  body {
-    @apply bg-bone-200 text-ink-900 font-sans antialiased;
-    font-size: 16px;
-    line-height: 1.55;
-    overflow-x: hidden;
-  }
-  p { text-wrap: pretty; }
-  *:focus-visible {
-    outline: none;
-    box-shadow: 0 0 0 2px theme('colors.bone.200'), 0 0 0 4px theme('colors.forest.600');
+  :root {
+    --background: 0 0% 3%;          /* #080808 */
+    --foreground: 210 42% 91%;      /* ice #DCE7F2 */
+
+    --card: 0 0% 6%;
+    --card-foreground: 210 42% 91%;
+    --popover: 0 0% 6%;
+    --popover-foreground: 210 42% 91%;
+
+    --primary: 4 75% 43%;           /* crimson #C0261C */
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 0 0% 10%;
+    --secondary-foreground: 210 42% 91%;
+
+    --muted: 0 0% 10%;
+    --muted-foreground: 210 14% 63%; /* dim #96A2AF */
+
+    --accent: 4 75% 43%;
+    --accent-foreground: 0 0% 100%;
+
+    /* Error tone. Deliberately NOT --primary: validation must read as "error", never as the section's
+       crimson emphasis, and the lighter tone keeps 12px error text above 4.5:1 on card and background. */
+    --destructive: 4 90% 68%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 0 0% 14%;
+    --input: 0 0% 12%;
+    --ring: 4 75% 43%;
+
+    --radius: 0.25rem;
+
+    --ice: 210 42% 91%;
+    --crimson: 4 75% 43%;
+    --dim: 210 14% 63%;
+    --ink: 0 0% 3%;
+    --ink-2: 0 0% 7%;
   }
 }
 
+@layer base {
+  * { @apply border-border; }
+  /* scroll-padding keeps hash targets and focused elements clear of the 4rem sticky header. */
+  html { scroll-behavior: smooth; scroll-padding-top: 4rem; }
+  body { @apply bg-background text-foreground antialiased; font-feature-settings: "ss01", "cv11"; }
+  ::selection { background: hsl(var(--crimson)); color: white; }
+}
+
 @layer components {
-  .container-x {
-    @apply max-w-[1200px] mx-auto px-8 md:px-5;
-  }
-  .caps {
-    @apply font-mono text-[11px] font-medium uppercase tracking-caps;
-  }
-  .btn {
-    @apply inline-flex items-center justify-center gap-2.5
-           font-sans font-semibold text-[15px] tracking-[0.005em]
-           px-[26px] py-3.5 rounded
-           border border-transparent cursor-pointer whitespace-nowrap
-           transition-[background,color,transform] duration-150 ease-out-expo;
-  }
-  .btn-primary {
-    @apply bg-forest-600 text-white border-forest-600 hover:bg-forest-500 hover:border-forest-500;
-  }
-  .btn-secondary {
-    @apply bg-transparent text-ink-900 border-ink-900 hover:bg-ink-900 hover:text-bone-100;
-  }
-  .btn-light {
-    @apply bg-bone-100 text-ink-900 border-bone-100 hover:bg-white hover:border-white;
-  }
-  .btn-outline-light {
-    @apply bg-transparent text-white border-white/45 hover:bg-white/10 hover:border-white;
-  }
-  .btn-sm {
-    @apply px-[18px] py-2.5 text-[13px];
-  }
-  .btn:disabled {
-    @apply opacity-50 cursor-not-allowed;
-  }
+  .container-pmo { @apply mx-auto w-full max-w-6xl px-5 sm:px-8; }
+  .display { @apply font-display uppercase leading-[0.92] tracking-[-0.01em]; }
+  .eyebrow { @apply font-mark text-[11px] font-semibold uppercase tracking-[0.22em] text-muted-foreground; }
+  .crimson-rule { @apply h-[3px] w-12 bg-primary; }
+  .btn-primary { @apply inline-flex items-center justify-center gap-2 bg-primary px-6 py-3.5 font-mark text-sm font-semibold uppercase tracking-[0.12em] text-primary-foreground transition hover:brightness-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary; }
+  .btn-ghost { @apply inline-flex items-center justify-center gap-2 border border-foreground/25 px-6 py-3.5 font-mark text-sm font-semibold uppercase tracking-[0.12em] text-foreground transition hover:border-foreground/70 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
 }

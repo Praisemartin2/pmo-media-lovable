@@ -1,73 +1,24 @@
-# React + TypeScript + Vite
+# pmo-media.com
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+PMO Media — real estate marketing agency website. Vite + React + TypeScript + Tailwind (shadcn/ui).
+Design system: black ground · ice-white type · one crimson accent per section (see `src/index.css`).
 
-Currently, two official plugins are available:
+## Run
+- `npm ci` then `npm run dev` (port 8080) · `npm run build` → `dist/`
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Deploy (Vercel — the domain already lives there)
+- Vercel → Add New Project → Import this GitHub repo → Framework: Vite (auto) → Deploy.
+- Project → Settings → Domains → add `pmo-media.com` and `www.pmo-media.com` (move them from the old project if prompted).
+- `vercel.json` already handles SPA rewrites + cache headers. Every push to `main` redeploys.
 
-## React Compiler
+A GitHub Pages preview also deploys from `main` (`.github/workflows/deploy-pages.yml`).
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Forms → marketwithpmo@gmail.com
+Both forms (Contact + the 4-step Brief) post to FormSubmit's AJAX endpoint for marketwithpmo@gmail.com.
+One-time: FormSubmit emails an **Activate** link to that inbox on the first submission — click it once and every
+submission after that lands in the inbox with a table layout. No accounts, no keys.
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## Content
+- Company data, services, packages, FAQ: `src/data/site.ts`
+- Portfolio + case study + testimonial: `src/data/portfolio.ts`, media in `public/portfolio/`
+- Brand assets: `public/brand/` (logo lockups, avatar, OG image, favicons)
