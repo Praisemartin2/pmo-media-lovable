@@ -25,6 +25,18 @@ export default {
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
+        /* PMO v2 palette */
+        crimson: "hsl(var(--crimson))",
+        cobalt: "hsl(var(--cobalt))",
+        amber: "hsl(var(--amber))",
+        navy: "hsl(var(--navy))",
+        wine: "hsl(var(--wine))",
+        ice: "hsl(var(--ice))",
+        dim: "hsl(var(--dim))",
+        ink: {
+          DEFAULT: "hsl(var(--ink))",
+          2: "hsl(var(--ink-2))",
+        },
         brand: {
           blue: "hsl(var(--brand-blue))",
           "blue-dark": "hsl(var(--brand-blue-dark))",
@@ -108,6 +120,14 @@ export default {
         "shimmer": {
           "100%": { transform: "translateX(100%)" },
         },
+        "hero-zoom": {
+          from: { transform: "scale(1.12)", opacity: "1" },
+          to: { transform: "scale(1) translateY(10%)", opacity: "0.35" },
+        },
+        "pulse-glow": {
+          "0%, 100%": { opacity: "0.55" },
+          "50%": { opacity: "1" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -116,11 +136,16 @@ export default {
         "fade-in": "fade-in 0.8s ease-out forwards",
         "float": "float 6s ease-in-out infinite",
         "marquee": "marquee 28s linear infinite",
+        "pulse-glow": "pulse-glow 4s ease-in-out infinite",
       },
       transitionTimingFunction: {
         smooth: "cubic-bezier(0.22, 1, 0.36, 1)",
       },
       backgroundImage: {
+        "glow-ambient":
+          "radial-gradient(55% 45% at 15% 10%, hsl(var(--crimson) / 0.30) 0%, transparent 60%), radial-gradient(50% 45% at 90% 90%, hsl(var(--cobalt) / 0.28) 0%, transparent 60%)",
+        "gradient-crimson-cobalt": "linear-gradient(120deg, hsl(var(--crimson)) 0%, hsl(var(--cobalt)) 100%)",
+        "gradient-ice-cobalt": "linear-gradient(92deg, hsl(var(--ice)) 0%, hsl(var(--cobalt)) 100%)",
         "hero-radial":
           "radial-gradient(60% 60% at 80% 0%, hsl(var(--brand-yellow) / 0.18) 0%, transparent 60%), radial-gradient(50% 50% at 0% 100%, hsl(var(--brand-blue) / 0.25) 0%, transparent 55%)",
       },

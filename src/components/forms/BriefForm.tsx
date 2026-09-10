@@ -32,7 +32,7 @@ function nextQuarterLabel(now = new Date()): string {
 const STARTS = ["This month", "Next 30–60 days", nextQuarterLabel(), "Just exploring"];
 const SOURCES = ["Referral", "Google search", "Instagram", "TikTok", "Podcast", "Saw our work at a listing", "Other"];
 
-const STEP_TITLES = ["WHO ARE WE TALKING TO?", "TELL US ABOUT THE BUSINESS.", "WHAT DO YOU NEED FROM PMO?", "CONTEXT & TIMING."];
+const STEP_TITLES = ["WHO ARE WE TALKING TO?", "TELL US ABOUT THE BUSINESS.", "WHAT DO YOU NEED FROM PMO MEDIA?", "CONTEXT & TIMING."];
 
 type Values = {
   name: string;
@@ -118,7 +118,7 @@ function summaryLines(v: Values): string[] {
     `Budget: ${or(v.budget)}`,
     `Package of interest: ${or(v.pkg)}`,
     `Ideal start: ${or(v.start)}`,
-    `Found PMO via: ${or(v.source)}`,
+    `Found PMO Media via: ${or(v.source)}`,
     `Biggest marketing pain: ${or(v.pain)}`,
   ];
 }
@@ -320,7 +320,7 @@ export function BriefForm({ presetPackage }: { presetPackage?: string }) {
       Budget: v.budget || "—",
       "Package of interest": v.pkg || "—",
       "Ideal start": v.start,
-      "Found PMO via": v.source || "—",
+      "Found PMO Media via": v.source || "—",
       "Biggest marketing pain": v.pain.trim() || "—",
     };
 
@@ -357,11 +357,11 @@ export function BriefForm({ presetPackage }: { presetPackage?: string }) {
           YOUR BRIEF IS IN.
         </h2>
         <p className="mt-6 max-w-lg text-lg text-muted-foreground">
-          Received. Your brief is in Praise&rsquo;s inbox &mdash; one principal reads it, not a bot.
+          Received. Your brief is with our strategy team and is read personally by the founder. Replies within 24 hours.
         </p>
         <div className="mt-8 flex flex-wrap gap-3">
           <Link to="/work" className="btn-primary">
-            See the work
+            See the results
             <ArrowRight className="h-4 w-4" aria-hidden="true" />
           </Link>
           <Link to="/" className="btn-ghost">
@@ -651,7 +651,7 @@ export function BriefForm({ presetPackage }: { presetPackage?: string }) {
                 ))}
               </NativeSelect>
             </Field>
-            <Field id="brief-source" label="How did you find PMO?">
+            <Field id="brief-source" label="How did you find PMO Media?">
               <NativeSelect
                 {...a11y("brief-source")}
                 name="source"
@@ -672,7 +672,7 @@ export function BriefForm({ presetPackage }: { presetPackage?: string }) {
               {...a11y("brief-pain")}
               name="pain"
               rows={5}
-              placeholder="Be honest. We've heard worse."
+              placeholder="What is not working, and what it is costing you."
               value={values.pain}
               onChange={(e) => set("pain", e.target.value)}
               className="min-h-[140px] rounded-none border-input bg-background text-base md:text-sm"

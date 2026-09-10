@@ -69,7 +69,7 @@ export default function Privacy() {
               <p>
                 The brief asks for your name, work email, phone number, an optional website or social handle, your
                 business name, role, market, monthly closings, the services you need, a budget range, a package of
-                interest, your ideal start window, how you found PMO, and a free-text answer about your biggest
+                interest, your ideal start window, how you found PMO Media, and a free-text answer about your biggest
                 marketing pain. The contact note asks for your name, email and message.
               </p>
               <p>

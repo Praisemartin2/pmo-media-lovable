@@ -26,20 +26,23 @@ export function Footer() {
             <div className="crimson-rule mt-6" aria-hidden="true" />
             <p className="mt-6 text-sm text-foreground">{site.tagline}</p>
             <p className="mt-2 text-sm text-muted-foreground">
-              {site.city} · {site.serving}
+              A brand architecture and growth firm for real estate.
+            </p>
+            <p className="mt-2 text-sm text-muted-foreground">
+              {site.legalName} · {site.city} · {site.serving}
             </p>
           </div>
 
-          {/* Navigate */}
-          <nav aria-labelledby="footer-navigate">
-            <h2 id="footer-navigate" className="eyebrow">
-              Navigate
+          {/* Capabilities */}
+          <nav aria-labelledby="footer-capabilities">
+            <h2 id="footer-capabilities" className="eyebrow">
+              Capabilities
             </h2>
             <ul className="mt-5 space-y-3">
-              {site.nav.map((item) => (
-                <li key={item.href}>
-                  <Link to={item.href} className={linkClass}>
-                    {item.label}
+              {site.services.map((service) => (
+                <li key={service.slug}>
+                  <Link to={`/#${service.slug}`} className={linkClass}>
+                    {service.title}
                   </Link>
                 </li>
               ))}

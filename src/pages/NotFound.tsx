@@ -34,7 +34,7 @@ export default function NotFound() {
           <p className="eyebrow">Error 404</p>
           <h1 className="display mt-4 max-w-4xl text-6xl sm:text-8xl">NOTHING LISTED AT THIS ADDRESS.</h1>
           <p className="mt-8 max-w-xl text-lg text-muted-foreground">
-            The page you asked for moved or never existed. Head back to the front page, or go straight to the work.
+            The page you asked for moved or never existed. Head back to the front page, or go straight to the results.
           </p>
           <p className="mt-3 break-all font-mono text-xs text-muted-foreground">
             <span className="sr-only">Requested path: </span>
@@ -48,7 +48,7 @@ export default function NotFound() {
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Link>
             <Link to="/work" className="btn-ghost">
-              See the work
+              See the results
             </Link>
           </div>
         </div>

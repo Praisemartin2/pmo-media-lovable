@@ -18,7 +18,7 @@ export default function Brief() {
     <>
       <SEO
         title="Start the brief — PMO Media"
-        description="Four short steps. Tell PMO Media about your market, your business and what you need — Praise reads every brief personally."
+        description="Four short steps. Tell PMO Media about your market, your business and what you need — every brief is read personally by the founder."
         path="/brief"
       />
 
@@ -30,7 +30,7 @@ export default function Brief() {
               FOUR SHORT STEPS. NO FLUFF.
             </h1>
             <p className="mt-6 max-w-xl text-lg text-muted-foreground">
-              We read every brief personally. It leads to a free 20-minute call &mdash; no deck, no pitch.
+              Our strategy team reads every brief and comes to the call with a point of view on your market.
             </p>
           </Reveal>
 
@@ -52,8 +52,8 @@ export default function Brief() {
               <div>
                 <p className="font-mark text-sm uppercase tracking-wide text-foreground">Prefer to talk first?</p>
                 <p className="mt-1 text-sm text-muted-foreground">
-                  A free 20-minute call &mdash; no deck, no pitch. We read your positioning, your market and your
-                  funnel, and tell you what we&rsquo;d build.
+                  Twenty minutes. We read your positioning, your market and your funnel, and tell you what
+                  we&rsquo;d build.
                 </p>
               </div>
               <a href={site.phoneHref} className="btn-ghost shrink-0" aria-label={`Call PMO Media at ${site.phone}`}>

@@ -3,6 +3,7 @@ import { Outlet, useLocation } from "react-router-dom";
 import { Nav } from "@/components/layout/Nav";
 import { Footer } from "@/components/layout/Footer";
 import { SkipLink } from "@/components/shared/SkipLink";
+import { ScrollProgress } from "@/components/motion/ScrollProgress";
 
 /**
  * App shell: skip link → sticky nav → routed page → footer.
@@ -64,6 +65,7 @@ export function Layout() {
 
   return (
     <div className="flex min-h-screen flex-col bg-background text-foreground">
+      <ScrollProgress />
       <SkipLink />
       <Nav />
       <main id="main" tabIndex={-1} className="flex-1 outline-none">

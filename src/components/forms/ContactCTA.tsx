@@ -1,17 +1,27 @@
-import { useEffect, useRef, useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent, type SyntheticEvent } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, Mail, Phone } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Reveal } from "@/components/shared/Reveal";
+import { Parallax } from "@/components/motion/Parallax";
 import { site } from "@/data/site";
 import { cn } from "@/lib/utils";
 
+const CTA_IMAGE = "/images/bokeh_lights.jpg";
+const CTA_IMAGE_960 = "/images/bokeh_lights_960.jpg";
+
+/** If the photo is missing the wine→ink→navy gradient behind it is the design — just drop the broken img. */
+const hideBrokenImage = (e: SyntheticEvent<HTMLImageElement>) => {
+  e.currentTarget.style.display = "none";
+};
+
 /**
- * Closing contact section. Full-bleed black, two columns on lg.
+ * Closing contact section (brief §11). Bokeh photo (parallax) over a wine→ink→navy gradient with a
+ * dark scrim so the copy and the form card stay legible; two columns on lg.
  * Left: the two ways in (brief, or call/email). Right: a three-field note.
- * The one crimson element in this section is the primary brief CTA; the headline stays ice.
+ * Headline and left-column intro come from site.finalCta / site.readyToScale.
  * Delivery: FormSubmit AJAX → marketwithpmo@gmail.com, with a mailto fallback on failure.
  */
 
@@ -121,20 +131,48 @@ export function ContactCTA() {
   const sending = status === "submitting";
 
   return (
-    <section id="contact" aria-labelledby="contact-title" className="border-t border-border bg-background py-20 sm:py-28">
-      <div className="container-pmo">
+    <section
+      id="contact"
+      aria-labelledby="contact-title"
+      className="relative overflow-hidden border-t border-border bg-background py-20 sm:py-28"
+    >
+      {/* ---- background stack: gradient ground → bokeh photo → legibility scrim ---- */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 bg-[linear-gradient(160deg,hsl(var(--wine))_0%,hsl(var(--ink))_50%,hsl(var(--navy))_100%)]"
+      >
+        <Parallax speed={0.12} className="absolute inset-x-0 -top-[10%] -bottom-[10%]">
+          <img
+            src={CTA_IMAGE}
+            srcSet={`${CTA_IMAGE_960} 960w, ${CTA_IMAGE} 1344w`}
+            sizes="100vw"
+            width={1344}
+            height={768}
+            alt=""
+            loading="lazy"
+            decoding="async"
+            onError={hideBrokenImage}
+            className="h-full w-full object-cover opacity-70"
+          />
+        </Parallax>
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,hsl(var(--ink)/0.55)_0%,hsl(var(--ink)/0.8)_60%,hsl(var(--ink)/0.96)_100%)]" />
+      </div>
+
+      <div className="container-pmo relative">
         <Reveal className="max-w-4xl">
-          <p className="eyebrow">Contact</p>
+          <p className="eyebrow text-amber">Contact</p>
           <h2 id="contact-title" className="display mt-4 text-5xl sm:text-7xl">
-            YOUR MARKET IS CHOOSING.
-            <span className="block">MAKE IT CHOOSE YOU.</span>
+            {site.finalCta.headline}
           </h2>
         </Reveal>
 
         <div className="mt-14 grid gap-12 lg:grid-cols-2 lg:gap-16">
           {/* Left: two ways in */}
           <Reveal delay={80}>
-            <h3 className="eyebrow">Two ways in</h3>
+            <h3 className="font-mark text-2xl uppercase tracking-wide text-foreground">{site.readyToScale.headline}</h3>
+            <p className="mt-3 max-w-lg text-base leading-relaxed text-muted-foreground">{site.readyToScale.text}</p>
+
+            <p className="eyebrow mt-10">Two ways in</p>
 
             <ol className="mt-8 space-y-10">
               <li className="grid grid-cols-[3.25rem_minmax(0,1fr)] gap-5">
@@ -144,7 +182,7 @@ export function ContactCTA() {
                 <div>
                   <h4 className="font-mark text-lg uppercase tracking-wide text-foreground">Start the brief</h4>
                   <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                    Four short steps. It lands in Praise&rsquo;s inbox &mdash; one principal, no account manager. Replies within 24 hours.
+                    Four short steps. It lands with our strategy team, not a sales queue. Replies within 24 hours.
                   </p>
                   <Link to="/brief" className="btn-primary mt-5">
                     Start the brief
@@ -160,16 +198,16 @@ export function ContactCTA() {
                 <div>
                   <h4 className="font-mark text-lg uppercase tracking-wide text-foreground">Call or email</h4>
                   <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                    Prefer to talk it through? A free 20-minute call &mdash; no deck, no pitch.
+                    Prefer to talk it through first? Twenty minutes, on the phone, with a strategist.
                   </p>
                   <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-                    <a href={site.phoneHref} className="btn-ghost" aria-label={`Call Praise at ${site.phone}`}>
+                    <a href={site.phoneHref} className="btn-ghost" aria-label={`Call PMO Media at ${site.phone}`}>
                       <Phone className="h-4 w-4" aria-hidden="true" />
-                      Call Praise
+                      Call us
                     </a>
-                    <a href={`mailto:${site.email}`} className="btn-ghost" aria-label={`Email Praise at ${site.email}`}>
+                    <a href={`mailto:${site.email}`} className="btn-ghost" aria-label={`Email PMO Media at ${site.email}`}>
                       <Mail className="h-4 w-4" aria-hidden="true" />
-                      Email Praise
+                      Email us
                     </a>
                   </div>
                   <p className="mt-4 text-sm text-muted-foreground">
@@ -182,7 +220,7 @@ export function ContactCTA() {
 
           {/* Right: short note */}
           <Reveal delay={160}>
-            <div className="border border-border bg-card p-6 sm:p-8">
+            <div className="border border-border bg-card/85 p-6 backdrop-blur-sm sm:p-8">
               {status === "success" ? (
                 <div role="status">
                   <p className="eyebrow">Sent</p>
@@ -190,10 +228,10 @@ export function ContactCTA() {
                     MESSAGE RECEIVED.
                   </h3>
                   <p className="mt-5 text-sm leading-relaxed text-muted-foreground">
-                    It&rsquo;s in Praise&rsquo;s inbox. You&rsquo;ll hear back from the principal, not a bot.
+                    It&rsquo;s with our strategy team. You&rsquo;ll hear from PMO Media within 24 hours.
                   </p>
                   <Link to="/work" className="btn-ghost mt-6">
-                    See the work
+                    See the results
                   </Link>
                 </div>
               ) : (
